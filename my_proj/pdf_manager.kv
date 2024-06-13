@@ -1,0 +1,50 @@
+<SectionManager>:
+    canvas.before:
+        Color:
+            rgba: 0.529, 0.808, 0.922, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    orientation: 'vertical'
+
+    BoxLayout:
+        size_hint_y: None
+        height: '48dp'
+        Spinner:
+            id: genre_spinner
+            text: 'Select Genre'
+            background_color: 0.753, 0.753, 0.753, 1.0
+            values: root.get_genres() if hasattr(root, 'get_genres') else []
+            on_text: root.update_genre(self.text) if hasattr(root, 'update_genre') else None
+
+    BoxLayout:
+        size_hint_y: None
+        height: '48dp'
+        Button:
+            text: 'Add PDF'
+            background_color:  0.13, 0.23, 0.35, 1
+            on_press: root.add_pdf()
+
+    ScrollView:
+        id: pdf_list
+        do_scroll_x: False
+        do_scroll_y: True
+        size_hint_y: None
+        height: root.height * 0.6  # Set a fixed or proportional height
+
+    BoxLayout:
+        size_hint_y: None
+        height: '48dp'
+        Button:
+            text: 'View PDF'
+            background_color: 0.13, 0.23, 0.35, 1
+            on_press: root.view_pdf()
+        Button:
+            text: "Delete PDF"
+            background_color: 0.13, 0.23, 0.35, 1
+            on_press: root.delete_pdf()
+        Button:
+            text: "Restart"
+            background_color: 0.13, 0.23, 0.35, 1
+            on_press: app.restart_app()
